@@ -29,6 +29,7 @@
 			dynamicArea: false,
 			minHeight: false,
 			animation: false,
+			borderColor: '#fff',
 			label: {
 				fontSize: '14px',
 				fill: '#fff'
@@ -163,6 +164,7 @@
 		this.dynamicArea = settings.dynamicArea;
 		this.minHeight = settings.minHeight;
 		this.animation = settings.animation;
+		this.borderColor = settings.borderColor;
 
 		// Calculate the bottom left x position
 		this.bottomLeftX = (this.width - this.bottomWidth) / 2;
@@ -442,12 +444,14 @@
 				.duration(this.animation)
 				.ease('linear')
 				.attr('fill', this._getColor(index))
+				.attr('stroke', this.borderColor)
 				.attr('d', this._getPathDefinition(index))
 				.each('end', function() {
 					self._drawSection(index + 1);
 				});
 		} else {
 			path.attr('fill', this._getColor(index))
+				.attr('stroke', this.borderColor)
 				.attr('d', this._getPathDefinition(index));
 			this._drawSection(index + 1);
 		}
@@ -559,7 +563,7 @@
 			return 'url(#gradient-' + index + ')';
 		}
 	};
-
+	
 	/**
 	 * @param {int} index
 	 *
@@ -586,9 +590,9 @@
 	 */
 	D3Funnel.prototype._onMouseOver = function(data)
 	{
-		d3.select(this).attr('fill', shadeColor(data.baseColor, -0.2));
+		d3.select(this).attr('fill', shadeColor(data.baseColor, 0.2));
 	};
-
+	
 	/**
 	 * @param {Object} data
 	 *
