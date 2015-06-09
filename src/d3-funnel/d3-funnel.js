@@ -540,7 +540,7 @@
 	{
 		return [{
 			index: index,
-			label: this.data[index][0],
+			label: typeof this.data[index][0] === 'string' ? this.data[index][0] : this.data[index][0][1],
 			value: this._isArray(this.data[index][1]) ? this.data[index][1][0] : this.data[index][1], formattedValue: this._isArray(this.data[index][1]) ? this.data[index][1][1] : this.data[index][1].toLocaleString(),
 			baseColor: this.data[index][2],
 			fill: this._getColor(index)
@@ -563,7 +563,7 @@
 			return 'url(#gradient-' + index + ')';
 		}
 	};
-	
+
 	/**
 	 * @param {int} index
 	 *
@@ -592,7 +592,7 @@
 	{
 		d3.select(this).attr('fill', shadeColor(data.baseColor, 0.2));
 	};
-	
+
 	/**
 	 * @param {Object} data
 	 *
